@@ -5,7 +5,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.*; // burada yine hasSize i silip * koyduk ki hepsini import etmis olalim
 
 public class GetRequest05 {
     /*
@@ -32,10 +32,10 @@ public class GetRequest05 {
                 statusCode(200).
                 contentType("application/json").
                 body("data.profile_image",hasSize(24), // burada istersek id yi istersek diger herhangi birini saydirabiliriz
-                "data.employee_name",hasItem("Ashton Cox"),
-                "data.employee_age",hasItems(21,61,23));
+                "data.employee_name",hasItem("Ashton Cox"), // hasItem boyle bir degere sahip mi anlaminda contains gibi
+                "data.employee_age",hasItems(21,61,23)); // birden fazla degeri kontrol edeceksek bu sekilde , ile hepsini yazabiliriz
 
-// normalde pass oldu test bazen fazla calistirmadan dolayi hata verebilir tekrar calistirmak gerekli
+// normalde pass oldu test bazen fazla calistirmadan dolayi hata verebilir tekrar calistirmak gerekli dummy de olabiliyor bu
 
 
 

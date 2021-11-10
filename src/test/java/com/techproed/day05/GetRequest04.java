@@ -4,7 +4,7 @@ import io.restassured.response.Response;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalTo; // mesela burda equalTo yerine * koyarsak diger baska methodlari da import etmis oluruz.
 
 public class GetRequest04 {
 
