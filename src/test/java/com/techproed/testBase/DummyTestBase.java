@@ -14,5 +14,7 @@ public class DummyTestBase {
         spec03=new RequestSpecBuilder().
                 setBaseUri("http://dummy.restapiexample.com/api/v1").
                 build();
+        // burda sadece v1 den sonrasi degisik oldugu icin buraya kadar olan kismi testbase de baseuri olarak belirledik
+
     }
 }

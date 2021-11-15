@@ -14,6 +14,9 @@ public class HerokuAppTestBase {
         spec02=new RequestSpecBuilder().
                 setBaseUri("https://restful-booker.herokuapp.com").
                 build();
+        // buraya tum elementler icin ayni olan kismi yaziyoruz devamindaki uzantilari parametre
+        // olarak diger classta ekleyecegiz cunku.
+
     }
 }
 

@@ -27,14 +27,21 @@ public class GetRequest06 extends JsonPlaceHolderTestBase {
         // String url="https://jsonplaceholder.typicode.com/todos/123";
         spec01.pathParams("parametre1", "todos",
                 "parametre2", 123);
+        // burada parametre1 ve 2 isimleri tamamen keyfi, burada parametre1 todos kismini, parametre2 123 u ifade eder
+        // burada degerlerini atamis olduk gitmek istedigimiz adrese gore
+        // key/value formetinda yaziyoruz
 
         Response response=given().
                 accept("application/json").
-                spec(spec01).
+                spec(spec01). // burada testBase deki belirlenen adresi aldik ve devaminda alttakileri ekledik
                 when().
                 get("/{parametre1}/{parametre2}");
+        // buradaki / ler adrestekilerin yerine, ustteki todos ve 123 u bu sekilde aliyoruz
 
         response.prettyPrint();
+
+        // buraya kadar herhangi bir assert yazmadan da kodu calistirsak pass der bunun anlami buraya kadar yazilan kodlarda hata yoktur demektir.
+
 
 
         response.then().

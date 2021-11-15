@@ -6,6 +6,9 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 
 public class GetRequest09 extends DummyTestBase {
@@ -19,10 +22,6 @@ public class GetRequest09 extends DummyTestBase {
     // Toplam 24 tane çalışan olduğunu,
     // "Rhona Davidson" ın employee lerden biri olduğunu
     // "21", "23", "61" yaşlarında employeeler olduğunu test edin
-
-
-
-
 
     @Test
     public void test() {
@@ -40,7 +39,7 @@ public class GetRequest09 extends DummyTestBase {
         JsonPath jsonPath=response.jsonPath();
 
         // status kodun 200,
-        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertEquals(200, response.getStatusCode()); // bunu mecburen response ile assert ediyoruz
         //Assert.assertTrue(response.getStatusCode()==200);
 
         // gelen body de,
@@ -51,16 +50,31 @@ public class GetRequest09 extends DummyTestBase {
         Assert.assertEquals(372000, jsonPath.getInt("data[5].employee_salary"));
 
         // Toplam 24 tane çalışan olduğunu,
-        System.out.println(jsonPath.getList("data.id").size());
+        System.out.println(jsonPath.getList("data.id").size()); // bunu sirf gormek icin yazdirdik
         Assert.assertEquals(24, jsonPath.getList("data.id").size());
 
         // "Rhona Davidson" ın employee lerden biri olduğunu
         Assert.assertTrue(jsonPath.getList("data.employee_name").contains("Rhona Davidson"));
 
         // "21", "23", "61" yaşlarında employeeler olduğunu test edin
-        Assert.assertTrue(jsonPath.getList("data.employee_age").contains(21) ||
-                jsonPath.getList("data.employee_age").contains(23) ||
-                jsonPath.getList("data.employee_age").contains(61));
+        /*
+        Assert.assertTrue(jsonPath.getList("data.employee_age").contains(21) &&
+                                    jsonPath.getList("data.employee_age").contains(23) &&
+                                    jsonPath.getList("data.employee_age").contains(61));
+        */
+
+        /*
+        List<Integer> list= Arrays.asList(21,23,61);
+        Assert.assertTrue(jsonPath.getList("data.employee_age").containsAll(list));
+         */
+        /*
+        Assert.assertTrue(jsonPath.getList("data.employee_age").stream().anyMatch(t-> t.equals(21) || t.equals(61) || t.equals(23)));
+         */
+        List<Integer> list=new ArrayList<Integer>();
+        list.add(21);
+        list.add(23);
+        list.add(61);
+        Assert.assertTrue(jsonPath.getList("data.employee_age").containsAll(list));
 
     }
 }
