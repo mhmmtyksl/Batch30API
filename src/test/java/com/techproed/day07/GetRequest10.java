@@ -42,7 +42,8 @@ public class GetRequest10 extends DummyTestBase {
 
         JsonPath jsonPath=response.jsonPath();
         // 1)10’dan büyük tüm id’leri ekrana yazdırın ve
-        List<Integer> idList= jsonPath.getList("data.findAll{it.id>10}.id");
+        List<Integer> idList= jsonPath.getList("data.findAll{it.id>10}.id"); // bu sekilde yazim Groovy dilidir.
+        // buradaki it yapidan gelen birseydir.yukaridaki yazim bize bir List dondurur bu yuzden List e atadik
         System.out.println(idList);
 
         // 10’dan büyük 14 id olduğunu,
@@ -53,13 +54,16 @@ public class GetRequest10 extends DummyTestBase {
         System.out.println(yasListesi);
 
         //  bu yaşların içerisinde en büyük yaşın 23 olduğunu
-        Collections.sort(yasListesi);
+        Collections.sort(yasListesi);// burada kucukten buyuge siraladik ve son index tekini alarak en buyugunu bulduk
         Assert.assertEquals((Integer)23,yasListesi.get(yasListesi.size()-1));
+        // data typlari farkli oldugu icin hata verdi 23 un basina (Integer) yazarak dataCasting islemi yaptik
+        // ya 23 un basina (Integer) yazariz yada ikinci siradakinin basina (int) yazarak birbirine uygun hale getiririz
         // Assert.assertEquals(23,(int)yasListesi.get(yasListesi.size()-1)); // bu sekilde de olabilir
 
-        // 3)Maası 350000 den büyük olan tüm employee name’leri ekrana yazdırın ve
+        // 3)Maası 350000 den büyük olan tüm employee_name’leri ekrana yazdırın ve
         List<String> isimListesi=jsonPath.getList("data.findAll{it.employee_salary>350000}.employee_name");
         System.out.println(isimListesi); // burda yas sartina bagli olarak isimleri getirttik
+        // yani sadece sarta bagladiklarimizi yazdirmak veya bulmak zorunda degiliz, farkli degerleri de alabiliriz
 
         //  bunların içerisinde “Charde Marshall” olduğunu test edin
         Assert.assertTrue(isimListesi.contains("Charde Marshall"));

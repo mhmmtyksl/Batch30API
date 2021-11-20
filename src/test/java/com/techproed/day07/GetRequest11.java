@@ -29,6 +29,11 @@ public class GetRequest11 extends JsonPlaceHolderTestBase {
         spec01.pathParams("parametre1","todos","parametre2", 2);
 
         HashMap<String, Object> expectedData=new HashMap<String, Object>();
+        // burada istenenleri bir map olusturarak icine attik
+        // key lerin hepsi String oldugu icin String yazdik ama value ler icinde hem String hem
+        // int oldugu icin hepsini kapsamasi icin Object olarak aldik.
+        // burada bu sekilde map olusturuyoruz ve tum istenen expected degerleri icine atiyoruz
+        // daha sonra assertion yaparken surekli bu map i kullanacagiz
         expectedData.put("statusCode", 200);
         expectedData.put("Via", "1.1 vegur");
         expectedData.put("Server", "cloudflare");
@@ -47,16 +52,16 @@ public class GetRequest11 extends JsonPlaceHolderTestBase {
 
         // 1. yontem Mathers class ile Assertion islemi bu sekilde oluyor
         response.then().assertThat().statusCode((int)expectedData.get("statusCode")).
-        headers("via", equalTo(expectedData.get("Via")),
+        headers("via", equalTo(expectedData.get("Via")), // headers in icindekileri burada yazdik
                 "Server", equalTo(expectedData.get("Server"))).
-        body("userId", equalTo(expectedData.get("userId")),
+        body("userId", equalTo(expectedData.get("userId")), // body nin icindekileri de burada yazdik
                 "title", equalTo(expectedData.get("title")),
                 "completed", equalTo(expectedData.get("completed")));
 
         // 2. yontem jsonPath yontemi
         JsonPath jsonPath=response.jsonPath();
 
-        Assert.assertEquals(expectedData.get("statusCode"),response.getStatusCode());
+        Assert.assertEquals(expectedData.get("statusCode"),response.getStatusCode());// burda headers ta olanlari mecburen response ile aliyoruz
         Assert.assertEquals(expectedData.get("Via"), response.header("via")); // header veya getHeader
         Assert.assertEquals(expectedData.get("Server"), response.header("Server"));
         Assert.assertEquals(expectedData.get("userId"), jsonPath.getInt("userId"));
@@ -66,6 +71,7 @@ public class GetRequest11 extends JsonPlaceHolderTestBase {
         // 3. yontem deserialization yontemi
         //   --object mapper
         //   --pojo class ile birlite map
+        // bunlari bir sonraki class ta yapmaya devam ettik
 
 
 

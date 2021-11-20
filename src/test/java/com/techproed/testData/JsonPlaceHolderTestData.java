@@ -6,6 +6,9 @@ import java.util.Map;
 public class JsonPlaceHolderTestData {
 
     public Map<String, Object> setupTestData() {
+        // burada method olusturuyoruz ve bu method bize bir Map dondurecek
+
+        // burada test edecegimiz testDatalarini bunun icine yazdik
     HashMap<String, Object> expectedData=new HashMap<String, Object>();
         expectedData.put("statusCode", 200);
         expectedData.put("Via", "1.1 vegur");

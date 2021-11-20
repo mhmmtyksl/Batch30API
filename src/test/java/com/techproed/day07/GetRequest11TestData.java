@@ -28,9 +28,11 @@ public class GetRequest11TestData extends JsonPlaceHolderTestBase {
         spec01.pathParams("parametre1","todos","parametre2", 2);
 
         JsonPlaceHolderTestData expectedObje=new JsonPlaceHolderTestData();
+        // JsonPlaceHolderTestData clasindaki methodu kullanabilmek icin burada obje olusturduk
+        // boylece extends yapmadan ordaki verileri ve methodlari kullanabilecegiz
 
         HashMap<String, Object> expectedData= (HashMap<String, Object>) expectedObje.setupTestData();
-        System.out.println(expectedData);
+        System.out.println("expedtedData : "+ expectedData);
 
         Response response=given().
                 accept("application/json").
@@ -59,10 +61,23 @@ public class GetRequest11TestData extends JsonPlaceHolderTestBase {
 
         // 3. yontem deserialization yontemi
         //   --object mapper
-        //   --pojo class ile birlite map
+        //   --pojo class ile birlikte map
+
+        HashMap<String, Object> actulData=response.as(HashMap.class); // anlami response dan gelenleri ez map a ata demek
+        // bu satir ile De-serialization islemini gerceklestirmis olduk
+        // response dan gelen json formatindaki bilgileri java ya cevirdik ve bir map a atadik
+        // De-serialization zaten response dan json formatinda donen datalari javaya cevieme islemidir.
+        // serialization ise tam tersi java datalarini json formatina dondurme islemidir.
+        // keyler hep string ama valueler degistigi icin 1. kismi string 2. kismi Object olarak aldik ki hepsini kapsasin.
+
+        System.out.println("actualData : "+actulData);
+
+        Assert.assertEquals(expectedData.get("userId"), actulData.get("userId"));
+        Assert.assertEquals(expectedData.get("title"), actulData.get("title"));
+        Assert.assertEquals(expectedData.get("completed"), actulData.get("completed"));
 
 
-
+        // yukaridaki 3 yontemin 3 u de kullanilabilir aralarinda herhangibir ayrim yoktur.
 
     }
 }
