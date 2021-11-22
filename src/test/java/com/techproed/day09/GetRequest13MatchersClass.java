@@ -53,6 +53,7 @@ public class GetRequest13MatchersClass extends DummyTestBase {
                         "data.employee_age",hasItems(((List)expectedDataMap.get("arananYaslar")).get(0),
                                 ((List<?>) expectedDataMap.get("arananYaslar")).get(1),
                                 ((List<?>) expectedDataMap.get("arananYaslar")).get(2)),
+                        "data[10].id", equalTo(((Map)expectedDataMap.get("onBirinciCalisan")).get("id")),
                         "data[10].employee_name",equalTo(((Map)expectedDataMap.get("onBirinciCalisan")).get("employee_name")),
                         "data[10].employee_salary",equalTo(((Map<?, ?>) expectedDataMap.get("onBirinciCalisan")).get("employee_salary")),
                         "data[10].employee_age",equalTo(((Map<?, ?>) expectedDataMap.get("onBirinciCalisan")).get("employee_age")),

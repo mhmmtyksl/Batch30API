@@ -46,7 +46,7 @@ public class GetRequest13 extends DummyTestBase {
 
        // response.prettyPrint();
 
-        // De-Serialization islemi yapacagiz
+        // De-Serialization islemi yapacagiz - bu sekilde json formatindaki datayi javaya donusturecegiz
         HashMap<String , Object> actualDataMap=response.as(HashMap.class);
         System.out.println("actualDataMap : "+actualDataMap);
 
@@ -56,6 +56,8 @@ public class GetRequest13 extends DummyTestBase {
         //5. Çalışan isminin "Airi Satou" olduğunu ,
         Assert.assertEquals(expectedDataMap.get("besinciCalisan"),
                 ((Map)((List)actualDataMap.get("data")).get(4)).get("employee_name"));
+        // buralarda hep data casting gerekiyor bu nedenle () icine alip baslarina casting turlerini yazdik
+        // once List e sonra tekrar Map a donusturduk
 
         // çalışan sayısının 24 olduğunu,
         Assert.assertEquals(expectedDataMap.get("calisanSayisi"),
@@ -73,7 +75,7 @@ public class GetRequest13 extends DummyTestBase {
            actualYasListesi.add((int)((Map)((List) actualDataMap.get("data")).get(i)).get("employee_age"));
        }
 
-       Assert.assertTrue(actualYasListesi.containsAll(((List)expectedDataMap.get("arananYaslar"))));
+       Assert.assertTrue(actualYasListesi.containsAll((List)expectedDataMap.get("arananYaslar")));
 
 
         //11. Çalışan bilgilerinin
@@ -84,6 +86,9 @@ public class GetRequest13 extends DummyTestBase {
         //"employee_age": "30",
         //"profile_image": "" }
         //} gibi olduğunu test edin.
+
+        Assert.assertEquals(((Map)expectedDataMap.get("onBirinciCalisan")).get("id"),
+                ((Map)((List<?>) actualDataMap.get("data")).get(10)).get("id"));
 
         Assert.assertEquals(((Map)expectedDataMap.get("onBirinciCalisan")).get("employee_name"),
                 ((Map)((List)actualDataMap.get("data")).get(10)).get("employee_name"));

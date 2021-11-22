@@ -1,5 +1,7 @@
 package com.techproed.testData;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 public class HerokuAppTestData {
@@ -32,7 +34,27 @@ public class HerokuAppTestData {
         // return un data type da expectedData olmali cunku oyle isimlendirdik bookingdates map i zaten digerinin icinde
         // oldugundan onu dondurmemize gerek yok
 
+    }
+
+    public JSONObject setupTestAndRequestData() {
+
+        JSONObject bookingdates=new JSONObject();
+        bookingdates.put("checkin", "2021-01-05");
+        bookingdates.put("checkout", "2021-01-10");
+
+        JSONObject expectedRequest=new JSONObject();
+        expectedRequest.put("firstname", "Batch30");
+        expectedRequest.put("lastname", "bitti");
+        expectedRequest.put("totalprice", 123);
+        expectedRequest.put("depositpaid", false);
+        expectedRequest.put("bookingdates", bookingdates);
+
+        return expectedRequest;
+
 
 
     }
+
+
+
 }
