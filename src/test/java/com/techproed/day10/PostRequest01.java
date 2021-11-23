@@ -44,6 +44,7 @@ olduğunu test edin
         Response response=given().
                 accept("application/json").
                 spec(spec03).auth().basic("admin", "password123").
+                body(requestBodyMap).
                 when().
                 post("/{parametre1}");
 

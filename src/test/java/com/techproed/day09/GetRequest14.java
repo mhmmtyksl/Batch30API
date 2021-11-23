@@ -67,6 +67,8 @@ public class GetRequest14 extends DummyTestBase {
 
         //En yüksek maaşın 725000 olduğunu,
         List<Integer> maasListesiJson=jsonPath.getList("data.employee_salary");
+        // jsonpath in kendisinden gelen bir getList methodu oldugu icin forrloop a gerek olmadan List yapabiliriz
+
         Collections.sort(maasListesiJson);
         Assert.assertEquals(expectedDataMap.get("enYuksekMaas"), maasListesiJson.get(maasListesiJson.size()-1));
 
@@ -78,9 +80,5 @@ public class GetRequest14 extends DummyTestBase {
         //İkinci en yüksek maaşın 675000
         //olduğunu test edin.
         Assert.assertEquals(expectedDataMap.get("ikinciEnYuksekMaas"), maasListesiJson.get(maasListesiJson.size()-2));
-
-
-
     }
-
 }
