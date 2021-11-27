@@ -33,15 +33,17 @@ Dönen response un status kodunun 200 ve body kısmının aşağıdaki gibi oldu
     @Test
     public void test() {
 
-        spec01.pathParams("parametre1", "todos", "parametre2", 198);
+        spec01.pathParams("parametre1", "todos",
+                    "parametre2", 198);
 
         JsonPlaceHolderTestData testObje= new JsonPlaceHolderTestData();
         JSONObject expectedRequest=testObje.setupPutTestData();
+        // burada hem expected hem requestimiz ayni degerlere sahip oldugu icin birlikte tanimladik
 
         System.out.println("expectedRequest : "+expectedRequest);
 
         Response response=given().
-                contentType(ContentType.JSON).
+                contentType(ContentType.JSON). // bu kismi bazen bu sekilde yazmak gerek yoksa internal server hatasi veriyor
                 spec(spec01).
                 auth().
                 basic("admin", "password123").

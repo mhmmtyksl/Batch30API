@@ -50,10 +50,11 @@ public class PostRequest02 extends HerokuAppTestBase {
         // requestBody ve expected Data ayni oldugu icin tek bir JSONObject kullanimi yeterlidir.
         HerokuAppTestData testData=new HerokuAppTestData();
         JSONObject expectedRequestData=testData.setupTestAndRequestData();
+        // burada hem expected hem requestimiz ayni degerlere sahip oldugu icin birlikte tanimladik
 
         // request gonder
         Response response=given().
-                contentType(ContentType.JSON).
+                contentType(ContentType.JSON).// bu kismi bazen bu sekilde yazmak gerek yoksa internal server hatasi veriyor
                 spec(spec02).
                 auth().
                 basic("admin", "password123").
@@ -65,7 +66,7 @@ public class PostRequest02 extends HerokuAppTestBase {
 
         // De-Serialization yontemi
         HashMap<String , Object> actualDataMap=response.as(HashMap.class);
-        System.out.println("actualDataMap : "+actualDataMap);
+        System.out.println("actualDataMap : "+actualDataMap); // burada gormek icin yazdirdik
 
         Assert.assertEquals(expectedRequestData.getString("firstname"),
                 ((Map)actualDataMap.get("booking")).get("firstname"));
